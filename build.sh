@@ -1,9 +1,15 @@
 #!/bin/bash
 
+ARGS="$@"
+
 rm -rf build/
 
-# shellcheck disable=SC2164
 mkdir build && cd build/
 
-cmake -DCMAKE_BUILD_TYPE=Debug ..
+if [ -n "$ARGS" ]; then
+  cmake -DCMAKE_BUILD_TYPE=Debug .. -DSUBDIRS="$ARGS"
+else
+  cmake -DCMAKE_BUILD_TYPE=Debug ..
+fi
+
 make -j4

@@ -101,7 +101,7 @@ jobs:
               filename=$(basename "$answer_file")
               student_file="$ANSWER_STUDENT_DIR/$filename"
               total_count=$((total_count + 1))
-            
+          
               if [ -f "$student_file" ]; then
                 if diff -b -q "$answer_file" "$student_file" > /dev/null; then
                   echo "CORRECT: $filename"
