@@ -66,16 +66,16 @@ int main(int argc, char **argv)
     SVFIR* svfir = builder.build();
 
     // 2) 导出 SVFIR / PAG
-    svfir->dump("svfir");
+    svfir->dump();
 
     // 3) 取 ICFG 并导出
     ICFG* icfg = svfir->getICFG();
-    icfg->dump("icfg");
+    icfg->dump();
 
     // 4) 通过指针分析构造调用图并导出
     AndersenWaveDiff* pta = new AndersenWaveDiff(svfir);
     pta->analyze();
-    pta->getCallGraph()->dump("callgraph");
+    pta->getCallGraph()->dump();
 
     //@}
 
