@@ -121,20 +121,36 @@ int main(int argc, char **argv)
 
     // TODO: here, generate SVFIR(PAG), call graph and ICFG, and dump them to files
     //@{
+   // TODO: here, generate SVFIR(PAG), call graph and ICFG, and dump them to files
+   //@{
+   
+   // 1) 建 SVFIR / PAG
+   SVFIR* svfir = builder.build();
+   
+   // 2) 运行 Andersen 分析
+   Andersen* pta = AndersenWaveDiff::createAndersenWaveDiff(svfir);
+   
+   // 3) dump 所有
+   svfir->dump();
+   pta->getICFG()->dump();  // 从 pta 获取 ICFG
+   pta->getCallGraph()->dump();
+   
+   //@}
     
-    // 1) 建 SVFIR / PAG
-    SVFIR* svfir = builder.build();
+    // // 1) 建 SVFIR / PAG
+    // SVFIR* svfir = builder.build();
 
-    // 2) 导出 SVFIR / PAG
-    svfir->dump();
+    // // 2) 导出 SVFIR / PAG
+    // svfir->dump();
 
-    // 3) 取 ICFG 并导出
-    ICFG* icfg = svfir->getICFG();
-    icfg->dump();
+    // // 3) 取 ICFG 并导出
+    // ICFG* icfg = svfir->getICFG();
+    // icfg->dump();
 
-    // 4) 通过指针分析构造调用图并导出
-    Andersen* pta = AndersenWaveDiff::createAndersenWaveDiff(svfir);
-    pta->getCallGraph()->dump();
+    // // 4) 通过指针分析构造调用图并导出
+    // Andersen* pta = AndersenWaveDiff::createAndersenWaveDiff(svfir);
+    // pta->getCallGraph()->dump();
+   
 
     //@}
 
