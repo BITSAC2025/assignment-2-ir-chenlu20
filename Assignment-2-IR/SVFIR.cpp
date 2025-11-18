@@ -156,13 +156,13 @@
 
 //     return 0;
 // }
+
 /**
  * SVFIR.cpp
  * @author 3220252746
  */
 #include "Graphs/SVFG.h"
 #include "SVF-LLVM/SVFIRBuilder.h"
-#include "WPA/Andersen.h"
 
 using namespace SVF;
 using namespace llvm;
@@ -200,16 +200,16 @@ int main(int argc, char **argv)
     // 1) 建 SVFIR / PAG
     SVFIR* svfir = builder.build();
     
-    // 2) 导出 SVFIR/PAG - 使用默认参数会生成 .pag 文件
-    svfir->dump("pag");  // 指定名称为"pag"
+    // 2) 直接从 svfir 获取各个图并导出
+    svfir->dump();  // 这会生成 .pag.dot 文件
     
-    // 3) 从SVFIR获取ICFG并导出
+    // 3) 获取并导出 ICFG
     ICFG* icfg = svfir->getICFG();
-    icfg->dump("icfg");  // 指定名称为"icfg"
+    icfg->dump();   // 这会生成 .icfg.dot 文件
     
-    // 4) 从SVFIR获取CallGraph并导出
-    CallGraph* cg = svfir->getCallGraph();  
-    cg->dump("callgraph");  // 指定名称为"callgraph"
+    // 4) 获取并导出 CallGraph  
+    CallGraph* cg = svfir->getCallGraph();
+    cg->dump();     // 这会生成 .cg.dot 文件
     
     //@}
 
